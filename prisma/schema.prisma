@@ -24,13 +24,13 @@ model Users {
 }
 
 model Schedules {
-  scheduleId     String   @id @db.Uuid
-  scheduleName   String   @db.VarChar(255)
-  startTime      DateTime @db.Timestamp()
-  endTime        DateTime @db.Timestamp()
-  isAllDay       Boolean  @default(false) @db.Boolean()
-  memo           String
-  user           Users    @relation(fields: [scheduleOwnerId], references: [userId], onDelete: Cascade)
+  scheduleId      String   @id @db.Uuid
+  scheduleName    String   @db.VarChar(255)
+  startTime       DateTime @db.Timestamp()
+  endTime         DateTime @db.Timestamp()
+  isAllDay        Boolean  @default(false) @db.Boolean()
+  memo            String
+  user            Users    @relation(fields: [scheduleOwnerId], references: [userId], onDelete: Cascade)
   scheduleOwnerId String
 
   @@index(fields: [scheduleId])
@@ -39,7 +39,7 @@ model Schedules {
 }
 
 model Invitations {
-  UUID       String   @id
+  UUID      String   @id
   createdAt DateTime @db.Timestamp()
   createdBy String
 
