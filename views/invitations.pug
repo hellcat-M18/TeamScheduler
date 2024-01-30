@@ -1,0 +1,15 @@
+extend layout 
+block content
+  link(rel="stylesheet", href="/public/stylesheets/invitations.css")
+  script(src="/public/javascripts/invitation_front.js")
+  div.flexParent
+    div.content
+      div.name
+        span.title Invite
+      div.info 
+        h4 ユーザー：#{userName}
+        h4 有効期限：あと#{expires}日
+      button.cancel cancel 
+      button.join Join
+    
+  

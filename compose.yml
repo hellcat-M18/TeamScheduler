@@ -1,0 +1,29 @@
+version: '3'
+services:
+  app:
+    build: .
+    tty: true
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/TeamScheduler 
+    depends_on:
+      - psql
+
+      
+  psql:
+    image: postgres:14.2
+    tty: true
+    ports:
+      - 5432:5432
+    volumes:
+      - psql:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: "061210"
+      POSTGRES_USER: postgres
+      POSTGRES_DB: TeamScheduler
+
+volumes:
+  TeamScheduler:
+  psql:
+    external: true

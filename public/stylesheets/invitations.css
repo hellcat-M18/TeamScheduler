@@ -1,0 +1,38 @@
+.flexParent{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.content{
+  padding: 10px;
+  border: 3px solid black;
+  border-radius: 10px;
+  width:100%;
+  max-width: 800px;
+}
+.name{
+  border-bottom: 3px solid;
+  text-align: center;
+}
+.title{
+  font-size: 30px;
+  font-weight: bold;
+  
+}
+.cancel{
+
+  background-color: lightgray;
+  width: 49%;
+  font-size: 20px;
+  border-radius: 10px;
+  margin-right: 2%;
+}
+.join{
+
+  background-color: cornflowerblue;
+  width:49%;
+  font-size: 20px;
+  border-radius: 10px;
+
+}

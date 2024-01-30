@@ -1,0 +1,49 @@
+extend layout
+block content
+  link(rel="stylesheet", href="/public/stylesheets/calendar.css")
+  script(src="/public/javascripts/calendar_front.js")
+
+  div.pageBody
+
+    div.visibility
+      div.headerCell
+        h5.header 表示中のユーザー
+      div(class=id).users.self
+        input(type="checkbox", name="self", id=id, checked).checkBox
+        span.userName #{displayName}
+      
+      each elem in partners
+        div(class=elem.id).users.partners
+          input(type="checkbox", name="partner", id=elem["id"], checked).checkBox
+          span.userName #{elem["name"]}
+
+
+      button.invite
+        span.label + Invite
+        
+
+    div.calendar
+      table.days
+        colgroup 
+          col.col1
+          col.col2
+          col.col3
+          col.col4
+          col.col5
+          col.col6
+          col.col7
+        tr 
+          th(height="10%" colspan="7").Month.text-center
+        
+        - for(i=1;i<=7;i++)
+          th(class="DayOfWeek_"+i).dayofweek
+
+        - for(i=0;i<5;i++)
+          tr
+            - for(n=1;n<=7;n++)
+              td(class="Date_"+(7*i+n)).dateCell
+      input.prev(type="submit" value="前の月")
+      input.next(type="submit" value="次の月")
+  button.logout
+    span.logouttext ログアウト
+    

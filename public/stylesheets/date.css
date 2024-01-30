@@ -1,0 +1,38 @@
+.container{
+  width: 100%;
+  max-width: 800px;
+}
+table{
+  width: 100%;
+  max-width: 800px;
+  border: thick solid gray;
+  table-layout: fixed;
+  overflow: hidden;
+}
+.name{
+  width: 55%;
+}
+.start,.end,.createdBy{
+  width: 15%;
+  border-left: thick solid gray;
+  overflow: hidden;
+}
+
+.headRaw{
+  background-color: lightgray;
+}
+.contentRaw{
+  height: 40px;
+  border: 1px solid;
+}
+#record{
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  font-size: 20px;
+  background-color: cornflowerblue;
+  color: white;
+  font-weight: 1000;
+  border: thick solid gray;
+  border-top: 0px;
+}

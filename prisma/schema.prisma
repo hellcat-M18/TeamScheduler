@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  userId   String   @id
+  userName String   @db.VarChar(255)
+  partners String[]
+
+  //displayname String @db.VarChar(255)
+  //joinedCalendarsId Json @db.Json
+
+  Schedules Schedules[]
+
+  @@map(name: "users")
+}
+
+model Schedules {
+  scheduleId     String   @id @db.Uuid
+  scheduleName   String   @db.VarChar(255)
+  startTime      DateTime @db.Timestamp()
+  endTime        DateTime @db.Timestamp()
+  isAllDay       Boolean  @default(false) @db.Boolean()
+  memo           String
+  user           Users    @relation(fields: [scheduleOwnerId], references: [userId], onDelete: Cascade)
+  scheduleOwnerId String
+
+  @@index(fields: [scheduleId])
+  @@index(fields: [scheduleOwnerId])
+  @@map(name: "schedules")
+}
+
+model Invitations {
+  UUID       String   @id
+  createdAt DateTime @db.Timestamp()
+  createdBy String
+
+  @@map(name: "invitations")
+}
+
+// model Calendars {
+//   calendarId Int @id @default(autoincrement())
+//   calendarOwnerUserId Int
+//   calendarUsersId Json @db.Json
+
+//   @@index(fields:[calendarId])
+//   @@map(name:"Calendars")
+// }

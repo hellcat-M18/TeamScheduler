@@ -1,0 +1,62 @@
+h3{
+  font-weight: 1000;
+}
+.flexParent{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.login{
+  border:4px solid gray;
+  width: clamp(0px,100%,500px);
+  text-align: center;
+  border-radius: 10px;
+}
+
+.title{
+  text-align: center;
+  font-family:Arial, Helvetica, sans-serif;
+  margin-top: 30px;
+}
+.github{
+  display: flex;
+  justify-content: center;
+  width: 95%;
+  height: 40px;
+  border-radius:10px;
+  background-color: #24292F;
+  padding: 5px;
+  margin: auto;
+  margin-top: 5px;
+}
+.githubtext{
+  color: white;
+  font-size: 110%;
+  font-weight: 1000;
+}
+.githubimg{
+  height: 95%;
+  padding-right: 10px;
+}
+
+.google{
+  display: flex;
+  justify-content: center;
+  width: 95%;
+  height: 40px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 5px;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.googletext{
+  font-size: 110%;
+  font-weight: 1000;
+}
+.googleimg{
+  height: 95%;
+  padding-right: 10px;
+}

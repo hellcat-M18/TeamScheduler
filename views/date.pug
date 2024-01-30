@@ -1,0 +1,24 @@
+extend layout 
+block content
+  link(rel="stylesheet", href="/public/stylesheets/date.css")
+  script(src="/public/javascripts/date_front.js") 
+  -
+    let renderDate = new Date(fulldate)
+    let dateString = `${renderDate.getFullYear()}年${renderDate.getMonth()+1}月${renderDate.getDate()}日`
+  h1.text-center= dateString
+  div.container
+    table
+      tr.headRaw
+        th.name 予定名
+        th.start.text-center 開始
+        th.end.text-center 終了
+        th.createdBy.text-center 作成者
+
+      each item,index in schedules 
+        tr.contentRaw
+          td(class=`${item.scheduleId} ${item.scheduleOwnerId}`).contentData.name #{item["scheduleName"]}
+          td(class=`${item.scheduleId} ${item.scheduleOwnerId}`).contentData.start.text-center #{item["startTime"]}
+          td(class=`${item.scheduleId} ${item.scheduleOwnerId}`).contentData.end.text-center #{item["endTime"]}
+          td(class=`${item.scheduleId} ${item.scheduleOwnerId}`).contentData.createdBy.text-center #{item["createdBy"]}
+  
+    input(type="button", value="予定登録")#record

@@ -1,0 +1,56 @@
+form{
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  border: 3px gray solid;
+  padding: 10px;
+  border-radius: 10px;
+}
+span{
+  font-size: 25px;
+  font-weight: 1000;
+}
+.scheduleName{
+  width: 100%;
+  font-size: 25px;
+}
+.start,.end{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.isAllDay{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 20px;
+  display: flex;
+}
+
+.allDay{
+  width: 20px;
+}
+
+.startTime,.endTime,.startDate,.endDate{
+  width: 20%;
+}
+
+.memo{
+  width: 100%;
+}
+#post{
+  width: 20%;
+  background-color: cornflowerblue;
+  font-size: 20px;
+  font-weight: 1000;
+  color: white;
+  border-radius: 10px;
+}
+#delete{
+  width: 20%;
+  background-color:indianred;
+  font-size: 20px;
+  font-weight: 1000;
+  color: white;
+  border-radius: 10px;
+}

@@ -1,0 +1,18 @@
+extends layout 
+
+block content 
+    link(rel="stylesheet", href="public/stylesheets/login.css")
+    script(src="/public/javascripts/login_front.js")
+    div.flexParent
+        div.login
+            h1 TeamScheduler
+            h3.title ログイン
+            
+            button(type="submit").github
+                img(src="public/images/github-mark-white.png",alt="").githubimg
+                span.githubtext Login with Github
+            
+            button(type="submit").google
+                img(src="public/images/google-icon.png", alt="").googleimg
+                span.googletext Login with Google
+            

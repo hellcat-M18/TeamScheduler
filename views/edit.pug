@@ -1,0 +1,35 @@
+extend layout
+block content
+    script(src="/public/javascripts/post_front.js")
+    link(rel="stylesheet", href="/public/stylesheets/new.css")
+    form()
+        div 
+            span タイトル
+            input(type="text",name="title",autocomplete="off",value=res[0]).scheduleName
+        div.start
+            label(for="StartDate") 開始日時
+            input(type="date",id="StartDate",name="StartDate",value=res[1]).startDate
+            br
+            label(for="StartTime") 開始時刻
+            input(type="time",id="StartTime",name="StartDate",value=res[2]).startTime
+
+        div.end
+            label(for="EndDate") 終了日時
+            input(type="date",id="EndDate",name="EndDate",value=res[3]).endDate
+            br
+            label(for="EndTime") 終了時刻
+            input(type="time",id="EndTime",name="EndTime",value=res[4]).endTime
+        
+        div.isAllDay 
+            label(for="AllDay") 終日
+            if res[6]
+                input(type="checkbox",id="AllDay",name="AllDay",checked).allDay
+            else 
+                input(type="checkbox",id="AllDay",name="AllDay").allDay
+
+        div 
+            h5 メモ
+            textarea(name="memo", cols="30", rows="10").memo #{res[5]}
+        div 
+            input(type="button",value="更新")#post
+            input(type="button",value="削除")#delete
