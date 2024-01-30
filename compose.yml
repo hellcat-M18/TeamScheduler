@@ -18,10 +18,8 @@ services:
       - 5432:5432
     volumes:
       - psql:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: "061210"
-      POSTGRES_USER: postgres
-      POSTGRES_DB: TeamScheduler
+    env_file:
+      - .env
 
 volumes:
   TeamScheduler:

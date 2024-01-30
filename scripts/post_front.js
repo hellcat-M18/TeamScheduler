@@ -35,13 +35,10 @@ $(window).on("load",function(){
   disableIfChecked($(".allDay"))
 
   //newかeditかの判定　newの場合のみjsから値を入れる
-  if(window.location.pathname.split("/").filter((elem)=>elem!=="")[2]==="new"){
-    let URLArray = window.location.pathname.split("/")
-    let URLOffset = 0
-    if(!URLArray[URLArray.length-1]){
-      URLOffset = 1
-    }
-    let URLDate = URLArray[URLArray.length-(2+URLOffset)]
+  const urlArray = window.location.pathname.split("/")
+  if(urlArray[urlArray.length-1]=="new"){
+
+    let URLDate = urlArray[urlArray.length-2]
     let currentTime = new Date().toFormat("HH24:MI")
   
     let displayDate = new Date(`${URLDate},${currentTime}`)
@@ -127,7 +124,8 @@ $(document).on("click","#delete",()=>{
     url:`${window.location.pathname}/deleteSchedule`
   })
   .done(()=>{
-    let params = new URLSearchParams({"lastViewDate":new Date(window.location.pathname.split("/")[2])})
+    const urlArray = window.location.pathname.split("/")
+    let params = new URLSearchParams({"lastViewDate":new Date(urlArray[urlArray.length-2])})
 
     window.location.href = `/calendar?${params.toString()}`
   })

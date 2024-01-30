@@ -1,8 +1,8 @@
 import $ from "jquery"
 require("date-utils")
 
-const urlPrefix = "http://localhost:8000/invitations/"
-//Todo リリース時に書き換え
+console.log("window.location",window.location)
+const urlPrefix = window.location.origin+"/invitations/"
 
 let paramsDate = new URLSearchParams(document.location.search).get("lastViewDate")
 
