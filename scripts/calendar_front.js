@@ -9,6 +9,8 @@ let paramsDate = new URLSearchParams(document.location.search).get("lastViewDate
 let currentDate = new Date()
 let renderDate = isValidDate(paramsDate) ? new Date(paramsDate):new Date()
 
+console.log("renderDate",renderDate)
+
 let userId
 let displayUsers = []
 
@@ -28,7 +30,8 @@ console.log(displayColorArray)
 function increaceMonth(inputDate){
     const {fullyear,month,date} = getMonthCurrent(inputDate)
 
-    renderDate = new Date(fullyear,month+1,date)
+    renderDate = new Date(fullyear,month+1,1)
+    console.log("increaceMonth",renderDate)
 
     renderResult(renderDate)
 }
@@ -36,7 +39,7 @@ function increaceMonth(inputDate){
 function decreaceMonth(inputDate){
     const {fullyear,month,date} = getMonthCurrent(inputDate)
 
-    renderDate = new Date(fullyear,month-1,date)
+    renderDate = new Date(fullyear,month-1,1)
 
     renderResult(renderDate)
 }

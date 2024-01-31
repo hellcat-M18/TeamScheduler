@@ -19,6 +19,8 @@ let paramsDate = new URLSearchParams(document.location.search).get("lastViewDate
 let currentDate = new Date()
 let renderDate = isValidDate(paramsDate) ? new Date(paramsDate):new Date()
 
+console.log("renderDate",renderDate)
+
 let userId
 let displayUsers = []
 
@@ -38,7 +40,8 @@ console.log(displayColorArray)
 function increaceMonth(inputDate){
     const {fullyear,month,date} = getMonthCurrent(inputDate)
 
-    renderDate = new Date(fullyear,month+1,date)
+    renderDate = new Date(fullyear,month+1,1)
+    console.log("increaceMonth",renderDate)
 
     renderResult(renderDate)
 }
@@ -46,7 +49,7 @@ function increaceMonth(inputDate){
 function decreaceMonth(inputDate){
     const {fullyear,month,date} = getMonthCurrent(inputDate)
 
-    renderDate = new Date(fullyear,month-1,date)
+    renderDate = new Date(fullyear,month-1,1)
 
     renderResult(renderDate)
 }
@@ -217,12 +220,18 @@ async function renderResult(renderDate){
             }
             cell.text(day)
             //今日ならオレンジの枠を追加
-            if(currentDate.toFormat("DD")==day){
-                if(firstDate.toFormat("MM")===currentDate.toFormat("MM")){
-                    cell.addClass("today")
-                }else{
-                    cell.removeClass("today")
-                }
+            // if(currentDate.toFormat("DD")==day){
+            //     if(firstDate.toFormat("MM")===currentDate.toFormat("MM")){
+            //         cell.addClass("today")
+            //     }else{
+            //         cell.removeClass("today")
+            //     }
+            // }else{
+            //     cell.removeClass("today")
+            // }
+
+            if(currentDate.toFormat("DD")==baseDay && firstDate.toFormat("YY-MM")==currentDate.toFormat("YY-MM")){
+                cell.addClass("today")
             }else{
                 cell.removeClass("today")
             }
