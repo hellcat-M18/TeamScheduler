@@ -60,11 +60,7 @@ router.get("/:invitationUUID",isAuth,async function(req,res,next){
 
     res.render("invitations",{userName,expires})
 
-  }else{
-
-    res.render("invitationNotFound")
-
-  } 
+  }
 
 })
 

@@ -2,7 +2,7 @@ import $ from "jquery"
 
 async function addPartners(userId,url){
   const urlArray = url.split("/")
-  const UUID = urlArray[urlArray.length]
+  const UUID = urlArray[urlArray.length-1]
   console.log(UUID)
 
   const data = {userId:userId,uuid:UUID}
