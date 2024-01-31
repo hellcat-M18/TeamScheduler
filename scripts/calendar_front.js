@@ -207,12 +207,18 @@ async function renderResult(renderDate){
             }
             cell.text(day)
             //今日ならオレンジの枠を追加
-            if(currentDate.toFormat("DD")==day){
-                if(firstDate.toFormat("MM")===currentDate.toFormat("MM")){
-                    cell.addClass("today")
-                }else{
-                    cell.removeClass("today")
-                }
+            // if(currentDate.toFormat("DD")==day){
+            //     if(firstDate.toFormat("MM")===currentDate.toFormat("MM")){
+            //         cell.addClass("today")
+            //     }else{
+            //         cell.removeClass("today")
+            //     }
+            // }else{
+            //     cell.removeClass("today")
+            // }
+
+            if(currentDate.toFormat("DD")==baseDay && firstDate.toFormat("YY-MM")==currentDate.toFormat("YY-MM")){
+                cell.addClass("today")
             }else{
                 cell.removeClass("today")
             }
