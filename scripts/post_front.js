@@ -120,7 +120,7 @@ $(document).on("click","#post",function(){
       .done(function(){
         let params = new URLSearchParams({"lastViewDate":ajaxData.startTime})
   
-        //window.location.href=`/calendar?${params.toString()}`
+        window.location.href=`/calendar?${params.toString()}`
       })
       .fail(function(jqXHR, textStatus, errorThrown){
         //console.log(errorThrown)
