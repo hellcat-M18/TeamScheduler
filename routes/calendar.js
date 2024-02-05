@@ -130,9 +130,9 @@ router.get("/:fulldate",isAuth,isValidDate,async function(req,res,next){
   const minDate = new Date(dateArray[0],dateArray[1]-1,1)
   const maxDate = new Date(dateArray[0],dateArray[1],1)
 
-  let = await getSchedulesInRange(userId,minDate,maxDate)
+  let schedules = await getSchedulesInRange(userId,minDate,maxDate)
 
-  let schedules = schedules.filter(function(item){
+  schedules = schedules.filter(function(item){
     let startTime = new Date(item.startTime)
     let startDate = new Date(startTime.getFullYear(),startTime.getMonth(),startTime.getDate())
 

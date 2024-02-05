@@ -10826,6 +10826,9 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click","#post",funct
   const endTime = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".endTime").val()
   const memo = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".memo").val()
 
+  console.log("startDate",startDate)
+  console.log("endDate",endDate)
+
   const inputDataArray = [scheduleName,startDate,startTime,endDate,endTime]
 
   let {isEmpty,desc} = isArrayEmpty(inputDataArray,inputDescArray)
@@ -10838,10 +10841,14 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click","#post",funct
     alert(alertText)
     
   }else{
-    const startTimeObj = new Date(`${startDate},${startTime}`)
-    const endTimeObj = new Date(`${endDate},${endTime}`)
 
-    if(isNaN(startTimeObj)||isNaN(endTimeObj)){
+    const maxDate = new Date(10000,1,1)
+    const minDate = new Date(0)
+
+    const startTimeObj = new Date(`${startDate}T${startTime}`)
+    const endTimeObj = new Date(`${endDate}T${endTime}`)
+
+    if(startTimeObj<minDate || endTimeObj<minDate || startTimeObj>=maxDate || endTimeObj>=maxDate || isNaN(startTimeObj) || isNaN(endTimeObj)){
 
       alert("無効な日付です")
       

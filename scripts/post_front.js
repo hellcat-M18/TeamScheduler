@@ -63,14 +63,21 @@ $(document).on("click","#post",function(){
   const memo = $(".memo").val()
   const isAllDay = $(".allDay").is(":checked")
 
+  console.log("startDate",startDate)
+  console.log("endDate",endDate)
+
   let startTimeObj,endTimeObj
+
+  const maxDate = new Date(10000,1,1)
+  const minDate = new Date(0)
+
   //終日の場合は期間を0000~2359に設定 表示に必要なだけ
   if(isAllDay){
-    startTimeObj = new Date(`${startDate},00:00`)
-    endTimeObj = new Date(`${endDate},23:59`)
+    startTimeObj = new Date(`${startDate}T00:00`)
+    endTimeObj = new Date(`${endDate}T23:59`)
   }else{
-    startTimeObj = new Date(`${startDate},${startTime}`)
-    endTimeObj = new Date(`${endDate},${endTime}`)
+    startTimeObj = new Date(`${startDate}T${startTime}`)
+    endTimeObj = new Date(`${endDate}T${endTime}`)
   }
 
   //入力不足判定
@@ -92,7 +99,7 @@ $(document).on("click","#post",function(){
 
   }else{
 
-    if(isNaN(startTimeObj)||isNaN(endTimeObj)){
+    if(startTimeObj<minDate || endTimeObj<minDate || startTimeObj>=maxDate || endTimeObj>=maxDate || isNaN(startTimeObj) || isNaN(endTimeObj)){
 
       alert("無効な日付です")
     
@@ -113,7 +120,7 @@ $(document).on("click","#post",function(){
       .done(function(){
         let params = new URLSearchParams({"lastViewDate":ajaxData.startTime})
   
-        window.location.href=`/calendar?${params.toString()}`
+        //window.location.href=`/calendar?${params.toString()}`
       })
       .fail(function(jqXHR, textStatus, errorThrown){
         //console.log(errorThrown)

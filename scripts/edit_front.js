@@ -25,6 +25,9 @@ $(document).on("click","#post",function(){
   const endTime = $(".endTime").val()
   const memo = $(".memo").val()
 
+  console.log("startDate",startDate)
+  console.log("endDate",endDate)
+
   const inputDataArray = [scheduleName,startDate,startTime,endDate,endTime]
 
   let {isEmpty,desc} = isArrayEmpty(inputDataArray,inputDescArray)
@@ -37,10 +40,14 @@ $(document).on("click","#post",function(){
     alert(alertText)
     
   }else{
-    const startTimeObj = new Date(`${startDate},${startTime}`)
-    const endTimeObj = new Date(`${endDate},${endTime}`)
 
-    if(isNaN(startTimeObj)||isNaN(endTimeObj)){
+    const maxDate = new Date(10000,1,1)
+    const minDate = new Date(0)
+
+    const startTimeObj = new Date(`${startDate}T${startTime}`)
+    const endTimeObj = new Date(`${endDate}T${endTime}`)
+
+    if(startTimeObj<minDate || endTimeObj<minDate || startTimeObj>=maxDate || endTimeObj>=maxDate || isNaN(startTimeObj) || isNaN(endTimeObj)){
 
       alert("無効な日付です")
       

@@ -1,52 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ([
-/* 0 */
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function getUserAgent(){
-  return new Promise((resolve,reject)=>{
-      jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
-          type:"GET",
-          url:"/userAgent"
-      })
-      .done((res)=>{
-          //console.log("getuserAgent",res.id)
-          resolve(res.id)
-      })
-      .fail((err)=>{
-          reject(err)
-      })
-  })
-  
-}
-
-const currentUserId = await getUserAgent()
-
-jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click","#record",function(){
-  window.location.href = `${window.location}/new`
-  //console.log("hey")
-})
-jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".contentData",(event)=>{
-  let elem = event.target
-  let schdeuleUUID = Array.from(elem.classList)[0]
-  let scheduleOwnerId = Array.from(elem.classList)[1]
-
-  if(scheduleOwnerId==currentUserId){
-    window.location.href = `${window.location}/${schdeuleUUID}`
-  }
-  
-})
-__webpack_async_result__();
-} catch(e) { __webpack_async_result__(e); } }, 1);
-
-/***/ }),
+/* 0 */,
 /* 1 */
 /***/ (function(module, exports) {
 
@@ -10769,6 +10723,54 @@ return jQuery;
 } );
 
 
+/***/ }),
+/* 2 */,
+/* 3 */
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function getUserAgent(){
+  return new Promise((resolve,reject)=>{
+      jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+          type:"GET",
+          url:"/userAgent"
+      })
+      .done((res)=>{
+          //console.log("getuserAgent",res.id)
+          resolve(res.id)
+      })
+      .fail((err)=>{
+          reject(err)
+      })
+  })
+  
+}
+
+const currentUserId = await getUserAgent()
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click","#record",function(){
+  window.location.href = `${window.location}/new`
+  //console.log("hey")
+})
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".contentData",(event)=>{
+  let elem = event.target
+  let schdeuleUUID = Array.from(elem.classList)[0]
+  let scheduleOwnerId = Array.from(elem.classList)[1]
+
+  if(scheduleOwnerId==currentUserId){
+    window.location.href = `${window.location}/${schdeuleUUID}`
+  }
+  
+})
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } }, 1);
+
 /***/ })
 /******/ 	]);
 /************************************************************************/
@@ -10911,7 +10913,7 @@ return jQuery;
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module used 'module' so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__(0);
+/******/ 	var __webpack_exports__ = __webpack_require__(3);
 /******/ 	
 /******/ })()
 ;
