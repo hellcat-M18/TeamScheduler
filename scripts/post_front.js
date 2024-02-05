@@ -92,29 +92,34 @@ $(document).on("click","#post",function(){
 
   }else{
 
-    const ajaxData = {
-      scheduleName:scheduleName,
-      startTime:startTimeObj.toISOString(),
-      endTime:endTimeObj.toISOString(),
-      memo:memo,
-      isAllDay:isAllDay
+    if(isNaN(startTimeObj)||isNaN(endTimeObj)){
+
+      alert("無効な日付です")
+    
+    }else{
+      const ajaxData = {
+        scheduleName:scheduleName,
+        startTime:startTimeObj.toISOString(),
+        endTime:endTimeObj.toISOString(),
+        memo:memo,
+        isAllDay:isAllDay
+      }
+      //post
+      $.ajax({
+        type:"POST",
+        url:`${window.location.pathname}/postSchedule`,
+        data:ajaxData,
+      })
+      .done(function(){
+        let params = new URLSearchParams({"lastViewDate":ajaxData.startTime})
+  
+        window.location.href=`/calendar?${params.toString()}`
+      })
+      .fail(function(jqXHR, textStatus, errorThrown){
+        //console.log(errorThrown)
+        alert(textStatus)
+      })
     }
-    //post
-    $.ajax({
-      type:"POST",
-      url:`${window.location.pathname}/postSchedule`,
-      data:ajaxData,
-    })
-    .done(function(){
-      let params = new URLSearchParams({"lastViewDate":ajaxData.startTime})
-
-      window.location.href=`/calendar?${params.toString()}`
-    })
-    .fail(function(jqXHR, textStatus, errorThrown){
-      console.log(errorThrown)
-      alert(textStatus)
-    })
-
   }
 })
 //予定削除
@@ -130,7 +135,7 @@ $(document).on("click","#delete",()=>{
     window.location.href = `/calendar?${params.toString()}`
   })
   .fail((jqXHR, textStatus, errorThrown)=>{
-    console.log(errorThrown)
+    //console.log(errorThrown)
     alert(textStatus)
   })
 })

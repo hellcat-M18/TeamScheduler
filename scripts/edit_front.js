@@ -35,33 +35,39 @@ $(document).on("click","#post",function(){
       alertText = alertText+`\n・${elem}`
     })
     alert(alertText)
-
+    
   }else{
     const startTimeObj = new Date(`${startDate},${startTime}`)
     const endTimeObj = new Date(`${endDate},${endTime}`)
 
-    console.log(typeof(startDate),startDate)
-    console.log(typeof(startTime),startTime)
+    if(isNaN(startTimeObj)||isNaN(endTimeObj)){
 
-    const ajaxData = {
-      scheduleName:scheduleName,
-      startTime:startTimeObj.toISOString(),
-      endTime:endTimeObj.toISOString(),
-      memo:memo
-    }
-    $.ajax({
-      type:"POST",
-      url:`${window.location.pathname}/postSchedule`,
-      data:ajaxData,
-    })
-    .done(function(){
-      console.log("done!")
-      window.location.pathname=`/calendar`
-    })
-    .fail(function(jqXHR, textStatus, errorThrown){
-      console.log(errorThrown)
-      alert(textStatus)
-    })
+      alert("無効な日付です")
+      
+    }else{
+      //console.log(typeof(startDate),startDate)
+      //console.log(typeof(startTime),startTime)
+
+      const ajaxData = {
+        scheduleName:scheduleName,
+        startTime:startTimeObj.toISOString(),
+        endTime:endTimeObj.toISOString(),
+        memo:memo
+      }
+      $.ajax({
+        type:"POST",
+        url:`${window.location.pathname}/postSchedule`,
+        data:ajaxData,
+      })
+      .done(function(){
+        //console.log("done!")
+        window.location.pathname=`/calendar`
+      })
+      .fail(function(jqXHR, textStatus, errorThrown){
+        //console.log(errorThrown)
+        alert(textStatus)
+      })
+      }
   }
 
   
@@ -77,7 +83,7 @@ $(document).on("click","#delete",()=>{
     window.location.pathname = "/calendar"
   })
   .fail((jqXHR, textStatus, errorThrown)=>{
-    console.log(errorThrown)
+    //console.log(errorThrown)
     alert(textStatus)
   })
 })

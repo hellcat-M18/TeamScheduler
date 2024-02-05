@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	var __webpack_modules__ = ({
-
-/***/ 1:
+/******/ 	var __webpack_modules__ = ([
+/* 0 */,
+/* 1 */
 /***/ (function(module, exports) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10724,8 +10724,8 @@ return jQuery;
 
 
 /***/ }),
-
-/***/ 5:
+/* 2 */,
+/* 3 */
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -10737,8 +10737,8 @@ __webpack_require__.r(__webpack_exports__);
 
 async function addPartners(userId,url){
   const urlArray = url.split("/")
-  const UUID = urlArray[urlArray.length]
-  console.log(UUID)
+  const UUID = urlArray[urlArray.length-1]
+  //console.log(UUID)
 
   const data = {userId:userId,uuid:UUID}
 
@@ -10766,7 +10766,7 @@ function getUserAgent(){
           url:"/userAgent"
       })
       .done((res)=>{
-          console.log("getuserAgent",res.id)
+          //console.log("getuserAgent",res.id)
           resolve(res.id)
       })
       .fail((err)=>{
@@ -10778,7 +10778,7 @@ function getUserAgent(){
 
 const userId = await getUserAgent()
 
-console.log("getUserAgent",userId)
+//console.log("getUserAgent",userId)
 
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".cancel",()=>{
@@ -10794,8 +10794,7 @@ __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } }, 1);
 
 /***/ })
-
-/******/ 	});
+/******/ 	]);
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
@@ -10936,7 +10935,7 @@ __webpack_async_result__();
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module used 'module' so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__(5);
+/******/ 	var __webpack_exports__ = __webpack_require__(3);
 /******/ 	
 /******/ })()
 ;

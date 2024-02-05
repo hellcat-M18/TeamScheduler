@@ -3,7 +3,7 @@ import $ from "jquery"
 async function addPartners(userId,url){
   const urlArray = url.split("/")
   const UUID = urlArray[urlArray.length-1]
-  console.log(UUID)
+  //console.log(UUID)
 
   const data = {userId:userId,uuid:UUID}
 
@@ -31,7 +31,7 @@ function getUserAgent(){
           url:"/userAgent"
       })
       .done((res)=>{
-          console.log("getuserAgent",res.id)
+          //console.log("getuserAgent",res.id)
           resolve(res.id)
       })
       .fail((err)=>{
@@ -43,7 +43,7 @@ function getUserAgent(){
 
 const userId = await getUserAgent()
 
-console.log("getUserAgent",userId)
+//console.log("getUserAgent",userId)
 
 
 $(document).on("click",".cancel",()=>{

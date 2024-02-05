@@ -7,7 +7,7 @@ function getUserAgent(){
           url:"/userAgent"
       })
       .done((res)=>{
-          console.log("getuserAgent",res.id)
+          //console.log("getuserAgent",res.id)
           resolve(res.id)
       })
       .fail((err)=>{
@@ -21,7 +21,7 @@ const currentUserId = await getUserAgent()
 
 $(document).on("click","#record",function(){
   window.location.href = `${window.location}/new`
-  console.log("hey")
+  //console.log("hey")
 })
 $(document).on("click",".contentData",(event)=>{
   let elem = event.target
