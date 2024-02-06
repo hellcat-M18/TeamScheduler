@@ -140,6 +140,53 @@ router.post("/addPartners",isAuth,async function(req,res){
 
 })
 
+router.post("/removePartners",isAuth,async(req,res,next)=>{
+  const requestUserId = req.user.id
+  const targetUserId = req.body.targetId
+
+  //リクエストしたユーザーを取得
+  const requestUser = await prisma.users.findFirst({
+    where:{
+      userId:requestUserId
+    }
+  })
+
+  //Arrayからターゲットを削除
+  let reqPartners = requestUser.partners 
+  reqPartners = reqPartners.filter((elem) => elem!==targetUserId)
+  
+  //DBを更新
+  const updateReqUserPartners = await prisma.users.update({
+    where:{
+      userId:requestUserId
+    },
+    data:{
+      partners:reqPartners
+    }
+  })
+
+  //対象のユーザーを取得
+  const targetUser = await prisma.users.findFirst({
+    where:{
+      userId:targetUserId
+    }
+  })
+
+  let tgtPartners = targetUser.partners
+  tgtPartners = tgtPartners.filter((elem)=>elem!==requestUserId)
+
+  const updateTgtUserPartners = await prisma.users.update({
+    where:{
+      userId:targetUserId
+    },
+    data:{
+      partners:tgtPartners
+    }
+  })
+  res.end()
+
+})
+
 
 
 module.exports = router;

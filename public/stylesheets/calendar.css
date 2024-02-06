@@ -22,14 +22,7 @@ html{
   border-bottom: 3px solid;
   padding: 5px;
 }
-.self{
-  color: white;
-  border: 0px;
-}
-.partners{
-  color: white;
-  border: 0px;
-}
+
 .users{
   display: flex;
   border: 2px solid;
@@ -37,6 +30,22 @@ html{
   margin: 5px;
   overflow: hidden;
 }
+
+.self{
+  color: white;
+  border: 0px;
+}
+.partners{
+  color: white;
+  border: 0px;
+  width: 80%;
+  border-right: 0px;
+  margin-right: 0px;
+}
+.flexParent{
+  display: flex;
+}
+
 .userName{
   margin-left: 10px;
   font-size: 1.2em;
@@ -45,6 +54,17 @@ html{
 .checkBox{
   margin-left: 10px;
   width: 1.1em;
+}
+.removeUser{
+  text-align: center;
+  font-weight: bolder;
+  font-size: 20px;
+  background-color: lightgray;
+  width: 20%;
+  border-radius: 5px;
+  margin: 5px;
+  margin-left: 0px;
+  border: 2px solid gray;
 }
 
 .invite{

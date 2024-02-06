@@ -13,9 +13,11 @@ block content
         span.userName #{displayName}
       
       each elem in partners
-        div(class=elem.id).users.partners
-          input(type="checkbox", name="partner", id=elem["id"], checked).checkBox
-          span.userName #{elem["name"]}
+        div.flexParent
+          div(class=elem.id).users.partners
+            input(type="checkbox", name="partner", id=elem["id"], checked).checkBox
+            span.userName #{elem["name"]}
+          span(id=elem.id).removeUser ✕
 
 
       button.invite

@@ -262,9 +262,9 @@ async function renderResult(renderDate){
             $(`.${userId}`).css("background-color","cornflowerblue")
             partners.forEach((elem,i)=>{
                 if(i<displayColorArray.length){
-                    $(`.${elem}`).css("background-color",`rgb(${displayColorArray[i][0]},${displayColorArray[i][1]},${displayColorArray[i][2]})`)
+                    $(`.${elem}.partners`).css("background-color",`rgb(${displayColorArray[i][0]},${displayColorArray[i][1]},${displayColorArray[i][2]})`)
                 }else{
-                    $(`${elem}`).css("background-color","gray")
+                    $(`${elem}.partners`).css("background-color","gray")
                 }
             });
             
@@ -364,5 +364,21 @@ $(document).on("click",".checkBox",async function(){
     console.log(displayUsers)
 
     await renderResult(renderDate)
+
+})
+$(document).on("click",".removeUser",async function(){
+    const clickedId = $(this).attr("id")
+
+    $.ajax({
+        type:"POST",
+        url:"/invitations/removePartners",
+        data:{targetId:clickedId}
+    })
+    .done((res,status,jqXHR)=>{
+        window.location.href = window.location.href
+    })
+    .fail((jqXHR,status,err)=>{
+        alert("error")
+    })
 
 })

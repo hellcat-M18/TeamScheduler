@@ -272,9 +272,9 @@ async function renderResult(renderDate){
             jquery__WEBPACK_IMPORTED_MODULE_0___default()(`.${userId}`).css("background-color","cornflowerblue")
             partners.forEach((elem,i)=>{
                 if(i<displayColorArray.length){
-                    jquery__WEBPACK_IMPORTED_MODULE_0___default()(`.${elem}`).css("background-color",`rgb(${displayColorArray[i][0]},${displayColorArray[i][1]},${displayColorArray[i][2]})`)
+                    jquery__WEBPACK_IMPORTED_MODULE_0___default()(`.${elem}.partners`).css("background-color",`rgb(${displayColorArray[i][0]},${displayColorArray[i][1]},${displayColorArray[i][2]})`)
                 }else{
-                    jquery__WEBPACK_IMPORTED_MODULE_0___default()(`${elem}`).css("background-color","gray")
+                    jquery__WEBPACK_IMPORTED_MODULE_0___default()(`${elem}.partners`).css("background-color","gray")
                 }
             });
             
@@ -374,6 +374,22 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".checkBox",a
     console.log(displayUsers)
 
     await renderResult(renderDate)
+
+})
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".removeUser",async function(){
+    const clickedId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("id")
+
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+        type:"POST",
+        url:"/invitations/removePartners",
+        data:{targetId:clickedId}
+    })
+    .done((res,status,jqXHR)=>{
+        window.location.href = window.location.href
+    })
+    .fail((jqXHR,status,err)=>{
+        alert("error")
+    })
 
 })
 __webpack_async_result__();
