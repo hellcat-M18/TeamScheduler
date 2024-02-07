@@ -376,7 +376,38 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".checkBox",a
     await renderResult(renderDate)
 
 })
-jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".removeUser",async function(){
+
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".removeUser",async function(event){
+
+    const targetUserId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("id")
+
+    function getUserName(){
+        return new Promise((resolve,reject)=>{
+            jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+                type:"POST",
+                url:"/getUserNameById",
+                data:{targetUserId:targetUserId}
+            })
+            .done((res,status,jqXHR)=>{
+                resolve(res)
+            })
+            .fail((jqXHR,status,err)=>{
+                reject(err)
+            })
+        })
+    }
+        
+    const userName = await getUserName()
+
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".checkUser").text(`${userName}との連携を解除しますか？`)
+
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".popupBackground").css("display","flex")
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".submitRemove").attr("id",jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("id"))
+})
+
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".submitRemove",async function(){
     const clickedId = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("id")
 
     jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
@@ -391,6 +422,11 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".removeUser"
         alert("error")
     })
 
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".popupBackground").css("display","none")
+
+})
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".cancelRemove",async function(){
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".popupBackground").css("display","none")
 })
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } }, 1);

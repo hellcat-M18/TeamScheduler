@@ -366,7 +366,38 @@ $(document).on("click",".checkBox",async function(){
     await renderResult(renderDate)
 
 })
-$(document).on("click",".removeUser",async function(){
+
+
+$(document).on("click",".removeUser",async function(event){
+
+    const targetUserId = $(this).attr("id")
+
+    function getUserName(){
+        return new Promise((resolve,reject)=>{
+            $.ajax({
+                type:"POST",
+                url:"/getUserNameById",
+                data:{targetUserId:targetUserId}
+            })
+            .done((res,status,jqXHR)=>{
+                resolve(res)
+            })
+            .fail((jqXHR,status,err)=>{
+                reject(err)
+            })
+        })
+    }
+        
+    const userName = await getUserName()
+
+    $(".checkUser").text(`${userName}との連携を解除しますか？`)
+
+    $(".popupBackground").css("display","flex")
+    $(".submitRemove").attr("id",$(this).attr("id"))
+})
+
+
+$(document).on("click",".submitRemove",async function(){
     const clickedId = $(this).attr("id")
 
     $.ajax({
@@ -381,4 +412,9 @@ $(document).on("click",".removeUser",async function(){
         alert("error")
     })
 
+    $(".popupBackground").css("display","none")
+
+})
+$(document).on("click",".cancelRemove",async function(){
+    $(".popupBackground").css("display","none")
 })

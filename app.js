@@ -121,22 +121,22 @@ app.get("/auth/google/callback",
   }
 )
 
-//招待リンクの期限切れ処理
-cron.schedule("* * * * *",async () =>{
+//招待リンクの期限切れ処理 => 不要になるかも？
+// cron.schedule("*/4 * * * *",async () =>{
 
-  let expireDate = new Date()
-  expireDate.setDate(expireDate.getDate()-7)
+//   let expireDate = new Date()
+//   expireDate.setDate(expireDate.getDate()-7)
 
-  console.log("expireDate",expireDate)
+//   console.log("expireDate",expireDate)
 
-  await prisma.invitations.deleteMany({
-    where:{
-      createdAt:{
-        lt:expireDate
-      }
-    }
-  })
-})
+//   await prisma.invitations.deleteMany({
+//     where:{
+//       createdAt:{
+//         lt:expireDate
+//       }
+//     }
+//   })
+// })
 
 
 
@@ -151,6 +151,19 @@ app.get("/getUser",isAuth,async (req,res) =>{
     }
   })
   res.send(user)
+})
+app.post("/getUserNameById",isAuth,async (req,res)=>{
+  const targetUserId = req.body.targetUserId
+
+  const user = await prisma.users.findFirst({
+    where:{
+      userId:targetUserId
+    }
+  })
+  const userName = user.userName
+
+  res.send(userName)
+
 })
 
 app.get("/login",(req,res)=>{

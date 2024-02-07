@@ -16,15 +16,20 @@
   text-align: center;
 }
 .title{
-  font-size: 30px;
-  font-weight: bold;
-  
+  font-size: 40px;
+  font-weight: bold; 
+}
+.info{
+  padding-left: 35%;
+  margin: 15px 0px 15px 0px;
 }
 .cancel{
 
-  background-color: lightgray;
+  background-color: gray;
   width: 49%;
-  font-size: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
   border-radius: 10px;
   margin-right: 2%;
 }
@@ -32,7 +37,9 @@
 
   background-color: cornflowerblue;
   width:49%;
-  font-size: 20px;
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
   border-radius: 10px;
 
 }
