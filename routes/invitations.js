@@ -14,19 +14,19 @@ const prisma = new PrismaClient({log:["query"]})
 router.get("/create",isAuth,async function(req,res,next){
 
   const createdBy = req.user.id
-  const generatedUUID = uuidv4()
-  const createdAt = new Date()
 
-  const createNewInvitation = await prisma.invitations.create({
-    data:{
-      UUID: generatedUUID,
-      createdAt: createdAt,
-      createdBy: createdBy
+  const userInfo = await prisma.users.findFirst({
+    where:{
+      userId:createdBy
     }
   })
-
-  res.end(createNewInvitation.UUID)
+  const invitationUUID = userInfo.invitationUUID
   
+  if(invitationUUID){
+    res.send(invitationUUID)
+  }else{
+    res.send("error")
+  }
 })
 
 
@@ -34,32 +34,17 @@ router.get("/create",isAuth,async function(req,res,next){
 //招待リンクに飛んだ時の画面
 router.get("/:invitationUUID",isAuth,async function(req,res,next){
   
-  const userId = req.user.id
   const UUID = req.params.invitationUUID
 
-  const storedUUID = await prisma.invitations.findFirst({
+  const userInfo = await prisma.users.findFirst({
     where:{
-      UUID:UUID
+      invitationUUID:UUID
     }
   })
-  if(storedUUID){
-    const createdBy = storedUUID.createdBy
-    const createdAt = storedUUID.createdAt
-
-    const currentDate = new Date()
-
-    const expires = Math.ceil(7-(currentDate-createdAt)/(1000*60*60*24))
-
-    const userInfo = await prisma.users.findUnique({
-      where:{
-        userId:createdBy,
-      }
-    })
-
-    const userName = userInfo.userName
-
-    res.render("invitations",{userName,expires})
-
+  if(userInfo){
+    res.render("invitations",{userName:userInfo.userName})
+  }else{
+    res.status(404).end()
   }
 
 })
@@ -69,74 +54,114 @@ router.post("/addPartners",isAuth,async function(req,res){
   const clickedUserId = req.body.userId
   const clickedUUID = req.body.uuid
 
-  console.log("clickedUserId",clickedUserId)
-  console.log("clickedUUID",clickedUUID)
-
-  //データベースを照会しUUIDからオーナーを取得
-  const UUIDInfo = await prisma.invitations.findFirst({
+  const targetUser = await prisma.users.findFirst({
     where:{
-      UUID:clickedUUID
+      invitationUUID:clickedUUID
     }
   })
-  const uuidOwnerId = UUIDInfo.createdBy
-
-  console.log("uuidOwner",uuidOwnerId)
-  console.log("clickedUser",clickedUserId)
-  if(uuidOwnerId==clickedUserId){
-    console.log("same!")
-    return res.end()
+  if(targetUser){
+    if(targetUser.userId==clickedUserId){
+      res.end()
+    }else{
+      if(targetUser.partners.findIndex((elem)=>elem==clickedUserId)==-1){
+        targetUser.partners.push(clickedUserId)
+        const updateTargetPartners = await prisma.users.update({
+          where:{
+            userId:targetUser.userId
+          },
+          data:{
+            partners:targetUser.partners
+          }
+        })
+      }
+    }
+  }else{
+    res.status(404).end()
   }
   
-  //パートナー取得用にユーザーテーブルを取得
-  const clickedUser = await prisma.users.findFirst({
+  const requestUser = await prisma.users.findFirst({
     where:{
       userId:clickedUserId
     }
   })
-
-  //クリックした人のパートナーを更新
-  const cPartners = clickedUser.partners
-  console.log("cPartners",cPartners)
-
-  if(cPartners.filter((elem)=>elem==uuidOwnerId).length==0){
-    cPartners.push(uuidOwnerId)
-    console.log("pushした")
-
-    await prisma.users.update({
-      where:{
-        userId:clickedUserId
-      },
-      data:{
-        partners:cPartners
-      }
-    })
-  }
-  
-  //パートナー取得用にユーザーテーブルを取得
-  const uuidOwner = await prisma.users.findFirst({
-    where:{
-      userId:uuidOwnerId
+  if(requestUser){
+    if(requestUser.partners.findIndex((elem)=>elem==targetUser.userId)==-1){
+      requestUser.partners.push(targetUser.userId)
+      const updateRequestUserPartners = await prisma.users.update({
+        where:{
+          userId:clickedUserId
+        },
+        data:{
+          partners:requestUser.partners
+        }
+      })
     }
-  })
-  //UUID作成者のパートナーを更新
-  const oPartners = uuidOwner.partners
-  console.log("oPartners",oPartners)
-
-  if(oPartners.filter((elem)=>elem==clickedUserId).length==0){
-    oPartners.push(clickedUserId)
-    console.log("pushした")
-
-    await prisma.users.update({
-      where:{
-        userId:uuidOwnerId
-      },
-      data:{
-        partners:oPartners
-      }
-    })
   }
-
   res.end()
+
+
+  // //データベースを照会しUUIDからオーナーを取得
+  // const UUIDInfo = await prisma.invitations.findFirst({
+  //   where:{
+  //     UUID:clickedUUID
+  //   }
+  // })
+  // const uuidOwnerId = UUIDInfo.createdBy
+  // if(uuidOwnerId==clickedUserId){
+  //   console.log("same!")
+  //   return res.end()
+  // }
+  
+  // //パートナー取得用にユーザーテーブルを取得
+  // const clickedUser = await prisma.users.findFirst({
+  //   where:{
+  //     userId:clickedUserId
+  //   }
+  // })
+
+  // //クリックした人のパートナーを更新
+  // const cPartners = clickedUser.partners
+  // console.log("cPartners",cPartners)
+
+  // if(cPartners.filter((elem)=>elem==uuidOwnerId).length==0){
+  //   cPartners.push(uuidOwnerId)
+  //   console.log("pushした")
+
+  //   await prisma.users.update({
+  //     where:{
+  //       userId:clickedUserId
+  //     },
+  //     data:{
+  //       partners:cPartners
+  //     }
+  //   })
+  // }
+  
+  // //パートナー取得用にユーザーテーブルを取得
+  // const uuidOwner = await prisma.users.findFirst({
+  //   where:{
+  //     userId:uuidOwnerId
+  //   }
+  // })
+  // //UUID作成者のパートナーを更新
+  // const oPartners = uuidOwner.partners
+  // console.log("oPartners",oPartners)
+
+  // if(oPartners.filter((elem)=>elem==clickedUserId).length==0){
+  //   oPartners.push(clickedUserId)
+  //   console.log("pushした")
+
+  //   await prisma.users.update({
+  //     where:{
+  //       userId:uuidOwnerId
+  //     },
+  //     data:{
+  //       partners:oPartners
+  //     }
+  //   })
+  // }
+
+  // res.end()
 
 })
 

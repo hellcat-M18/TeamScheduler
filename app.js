@@ -10,6 +10,7 @@ const helmet = require("helmet");
 
 //自分で入れたライブラリ
 const cron = require("node-cron")
+const {v4:uuidv4} = require("uuid")
 
 //Passport認証関連
 const session = require("express-session");
@@ -95,7 +96,7 @@ app.get("/auth/github/callback",
     const updateUser = await prisma.users.upsert({
       where:{userId:req.user.id},
       update:{userName:req.user.username},
-      create:{userId:req.user.id,userName:req.user.username}
+      create:{userId:req.user.id, userName:req.user.username, invitationUUID:uuidv4(), partners:[]}
     })
 
     res.redirect("/calendar")
@@ -115,7 +116,7 @@ app.get("/auth/google/callback",
     const updateUser = await prisma.users.upsert({
       where:{userId:req.user.id},
       update:{userName:req.user.displayName},
-      create:{userId:req.user.id,userName:req.user.displayName}
+      create:{userId:req.user.id, userName:req.user.displayName, invitationUUID:uuidv4(), partners:[]}
     })
     res.redirect("/calendar")
   }

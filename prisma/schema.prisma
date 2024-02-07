@@ -18,7 +18,8 @@ model Users {
   //displayname String @db.VarChar(255)
   //joinedCalendarsId Json @db.Json
 
-  Schedules Schedules[]
+  Schedules      Schedules[]
+  invitationUUID String
 
   @@map(name: "users")
 }
@@ -38,13 +39,13 @@ model Schedules {
   @@map(name: "schedules")
 }
 
-model Invitations {
-  UUID      String   @id
-  createdAt DateTime @db.Timestamp()
-  createdBy String
+// model Invitations {
+//   UUID      String   @id
+//   createdAt DateTime @db.Timestamp()
+//   createdBy String
 
-  @@map(name: "invitations")
-}
+//   @@map(name: "invitations")
+// }
 
 // model Calendars {
 //   calendarId Int @id @default(autoincrement())

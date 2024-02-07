@@ -209,16 +209,6 @@ async function renderResult(renderDate){
                 }
             }
             cell.text(day)
-            //今日ならオレンジの枠を追加
-            // if(currentDate.toFormat("DD")==day){
-            //     if(firstDate.toFormat("MM")===currentDate.toFormat("MM")){
-            //         cell.addClass("today")
-            //     }else{
-            //         cell.removeClass("today")
-            //     }
-            // }else{
-            //     cell.removeClass("today")
-            // }
 
             if(currentDate.toFormat("DD")==baseDay && firstDate.toFormat("YY-MM")==currentDate.toFormat("YY-MM")){
                 cell.addClass("today")
@@ -263,8 +253,10 @@ async function renderResult(renderDate){
             partners.forEach((elem,i)=>{
                 if(i<displayColorArray.length){
                     $(`.${elem}.partners`).css("background-color",`rgb(${displayColorArray[i][0]},${displayColorArray[i][1]},${displayColorArray[i][2]})`)
+                    $(`.schedule.${elem}`).css("background-color",`rgb(${displayColorArray[i][0]},${displayColorArray[i][1]},${displayColorArray[i][2]})`)
                 }else{
-                    $(`${elem}.partners`).css("background-color","gray")
+                    $(`.${elem}.partners`).css("background-color","gray")
+                    $(`.schedule.${elem}`).css("background-color","gray")
                 }
             });
             
