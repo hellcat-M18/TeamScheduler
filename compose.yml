@@ -5,6 +5,7 @@ services:
     tty: true
     ports:
       - 8000:8000
+      - 5555:5555
     volumes:
       - .:/TeamScheduler 
     depends_on:
