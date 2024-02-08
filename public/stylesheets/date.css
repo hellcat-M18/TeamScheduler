@@ -11,6 +11,7 @@ table{
 }
 .name{
   width: 55%;
+  overflow: hidden;
 }
 .start,.end,.createdBy{
   width: 15%;
