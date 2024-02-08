@@ -7,7 +7,22 @@ const urlPrefix = window.location.origin+"/invitations/"
 let paramsDate = new URLSearchParams(document.location.search).get("lastViewDate")
 
 let currentDate = new Date()
-let renderDate = isValidDate(paramsDate) ? new Date(paramsDate):new Date()
+let renderDate
+let accessType = window.performance.getEntriesByType("navigation")[0].type
+
+console.log(accessType)
+
+if(isValidDate(paramsDate)){
+    if(accessType==="reload"){
+        renderDate = new Date()
+        window.location.href = window.location.href.split("?")[0]
+    }else{
+        renderDate = new Date(paramsDate)
+    }
+}else{
+    renderDate = new Date()
+}
+//let renderDate = isValidDate(paramsDate) ? new Date(paramsDate):new Date()
 
 console.log("renderDate",renderDate)
 

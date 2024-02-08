@@ -53,16 +53,19 @@ router.post("/addPartners",isAuth,async function(req,res){
 
   const clickedUserId = req.body.userId
   const clickedUUID = req.body.uuid
+  
 
   const targetUser = await prisma.users.findFirst({
     where:{
       invitationUUID:clickedUUID
     }
   })
-  if(targetUser){
-    if(targetUser.userId==clickedUserId){
-      res.end()
-    }else{
+
+  console.log("targetUserId",targetUser.userId)
+  console.log("clickedUserId",clickedUserId)
+
+  if(targetUser.userId!==clickedUserId){
+    if(targetUser){
       if(targetUser.partners.findIndex((elem)=>elem==clickedUserId)==-1){
         targetUser.partners.push(clickedUserId)
         const updateTargetPartners = await prisma.users.update({
@@ -74,27 +77,27 @@ router.post("/addPartners",isAuth,async function(req,res){
           }
         })
       }
+    }else{
+      res.status(404).end()
     }
-  }else{
-    res.status(404).end()
-  }
-  
-  const requestUser = await prisma.users.findFirst({
-    where:{
-      userId:clickedUserId
-    }
-  })
-  if(requestUser){
-    if(requestUser.partners.findIndex((elem)=>elem==targetUser.userId)==-1){
-      requestUser.partners.push(targetUser.userId)
-      const updateRequestUserPartners = await prisma.users.update({
-        where:{
-          userId:clickedUserId
-        },
-        data:{
-          partners:requestUser.partners
-        }
-      })
+    
+    const requestUser = await prisma.users.findFirst({
+      where:{
+        userId:clickedUserId
+      }
+    })
+    if(requestUser){
+      if(requestUser.partners.findIndex((elem)=>elem==targetUser.userId)==-1){
+        requestUser.partners.push(targetUser.userId)
+        const updateRequestUserPartners = await prisma.users.update({
+          where:{
+            userId:clickedUserId
+          },
+          data:{
+            partners:requestUser.partners
+          }
+        })
+      }
     }
   }
   res.end()
