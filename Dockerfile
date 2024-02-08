@@ -10,4 +10,4 @@ ENV TZ=Asia/Tokyo
 WORKDIR /TeamScheduler
 COPY . /TeamScheduler
 
-CMD ["sh","run.sh"]
+##CMD ["sh","run.sh"]
