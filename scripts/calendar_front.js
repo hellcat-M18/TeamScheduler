@@ -324,7 +324,13 @@ $(document).on("click",".dateCell",function(){
     
 })
 $(document).on("click",".logout",()=>{
-    window.location.href="/logout"
+    $(".logoutBackground").css("display","flex")
+})
+$(document).on("click",".cancelLogout",()=>{
+    $(".logoutBackground").css("display","none")
+})
+$(document).on("click",".submitLogout",()=>{
+    window.location.href = "/logout"
 })
 
 $(document).on("click",".invite",()=>{
@@ -399,7 +405,7 @@ $(document).on("click",".removeUser",async function(event){
 
     $(".checkUser").text(`${userName}との連携を解除しますか？`)
 
-    $(".popupBackground").css("display","flex")
+    $(".rmUserBackground").css("display","flex")
     $(".submitRemove").attr("id",$(this).attr("id"))
 })
 
@@ -423,5 +429,18 @@ $(document).on("click",".submitRemove",async function(){
 
 })
 $(document).on("click",".cancelRemove",async function(){
-    $(".popupBackground").css("display","none")
+    $(".rmUserBackground").css("display","none")
+})
+
+
+
+$(document).on("click",".switchLeftMenu",async function(){
+    const leftMenu = $(".visibility")
+    if(leftMenu.css("display")=="none"){
+        leftMenu.css("display","block")
+        $(this).text("<<")
+    }else{
+        leftMenu.css("display","none")
+        $(this).text(">>")
+    }
 })

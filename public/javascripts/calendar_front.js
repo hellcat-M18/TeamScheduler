@@ -334,7 +334,13 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".dateCell",f
     
 })
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".logout",()=>{
-    window.location.href="/logout"
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".logoutBackground").css("display","flex")
+})
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".cancelLogout",()=>{
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".logoutBackground").css("display","none")
+})
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".submitLogout",()=>{
+    window.location.href = "/logout"
 })
 
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".invite",()=>{
@@ -409,7 +415,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".removeUser"
 
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(".checkUser").text(`${userName}との連携を解除しますか？`)
 
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".popupBackground").css("display","flex")
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".rmUserBackground").css("display","flex")
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(".submitRemove").attr("id",jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr("id"))
 })
 
@@ -433,7 +439,20 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".submitRemov
 
 })
 jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".cancelRemove",async function(){
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".popupBackground").css("display","none")
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".rmUserBackground").css("display","none")
+})
+
+
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click",".switchLeftMenu",async function(){
+    const leftMenu = jquery__WEBPACK_IMPORTED_MODULE_0___default()(".visibility")
+    if(leftMenu.css("display")=="none"){
+        leftMenu.css("display","block")
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).text("<<")
+    }else{
+        leftMenu.css("display","none")
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).text(">>")
+    }
 })
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } }, 1);

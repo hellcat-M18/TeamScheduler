@@ -22,16 +22,21 @@ block content
 
       button.invite
         span.label + Invite
+
+      div.logoutButtonArea
+        button.logout
+          span.logouttext Sign out
         
 
     div.calendar
+      button.switchLeftMenu >>
       table.days
         colgroup 
           col.col1
           col.col2
           col.col3
           col.col4
-          col.col5
+          col.col5 
           col.col6
           col.col7
         tr 
@@ -46,14 +51,19 @@ block content
               td(class="Date_"+(7*i+n)).dateCell
       input.prev(type="submit" value="前の月")
       input.next(type="submit" value="次の月")
-  button.logout
-    span.logouttext ログアウト
   
-  div.popupBackground
+  div.rmUserBackground
     div.popup
       h1.popupText 連係解除
       p.checkUser 
       div.popupButtons
         button.cancelRemove キャンセル
         button.submitRemove 解除
+  
+  div.logoutBackground
+    div.popup
+      h1.popupText サインアウトしますか？ 
+      div.popupButtons
+        button.cancelLogout キャンセル
+        button.submitLogout サインアウト
       
