@@ -10,11 +10,16 @@ table{
   overflow: hidden;
 }
 .name{
-  width: 55%;
+  width: 50%;
   overflow: hidden;
 }
-.start,.end,.createdBy{
+.start,.end{
   width: 15%;
+  border-left: thick solid gray;
+  overflow: hidden;
+}
+.createdBy{
+  width: 20%;
   border-left: thick solid gray;
   overflow: hidden;
 }
